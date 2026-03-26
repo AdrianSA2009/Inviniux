@@ -1,4 +1,4 @@
-# Aplikasi Stok Gudang Elektronik (GudangPro)
+# Aplikasi Stok Gudang Elektronik
 
 [](https://www.google.com/search?q=%5Bhttps://laravel.com%5D\(https://laravel.com\))
 [](https://tailwindcss.com)
