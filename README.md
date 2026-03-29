@@ -1,10 +1,10 @@
-# Aplikasi Stok Gudang Elektronik
+# Inviniux - Aplikasi Stok Gudang Elektronik
 
 [](https://www.google.com/search?q=%5Bhttps://laravel.com%5D\(https://laravel.com\))
 [](https://tailwindcss.com)
 [](https://www.polibatam.ac.id/)
 
-Aplikasi Stok Gudang Elektronik adalah sistem manajemen inventaris berbasis web yang dirancang untuk mengoptimalkan pengaturan dan pengawasan persediaan barang di gudang. Sistem ini memungkinkan pencatatan barang masuk dan keluar secara akurat serta menghasilkan laporan stok otomatis.
+Inviniux adalah sistem manajemen inventaris berbasis web yang dirancang untuk mengoptimalkan pengaturan dan pengawasan persediaan barang di gudang. Sistem ini memungkinkan pencatatan barang masuk dan keluar secara akurat serta menghasilkan laporan stok otomatis.
 
 ## 📋 Fitur Utama
 
