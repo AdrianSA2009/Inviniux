@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Barang - Manajer</title>
+    <title>Data Barang - Admin</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flowbite -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
@@ -15,15 +17,8 @@
     
     <style>
         body { font-family: 'Inter', sans-serif; }
-        
-        .sidebar-nav::-webkit-scrollbar {
-            width: 0px;
-            background: transparent;
-        }
-        .sidebar-nav {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+
+        .sidebar-nav::-webkit-scrollbar { width: 0px; background: transparent; }
 
         .glass-hover:hover {
             background: rgba(255, 255, 255, 0.1);
@@ -39,31 +34,27 @@
 <body class="bg-slate-50 text-gray-800 h-screen flex overflow-hidden">
 
     <!-- Sidebar -->
-    <aside id="sidebar" class="bg-slate-900 text-white w-72 flex-shrink-0 hidden md:flex flex-col transition-all duration-300 z-30 absolute md:relative h-full shadow-2xl">
+    <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full md:translate-x-0 bg-slate-900 text-white flex flex-col shadow-2xl" aria-label="Sidebar">
         <div class="p-6 flex items-center gap-3 border-b border-slate-700">
             <div class="bg-blue-600 p-2 rounded-lg">
                 <i class="fas fa-laptop-code text-white"></i>
             </div>
             <h1 class="text-xl font-bold tracking-tight">Inviniux</h1>
-            <button id="closeSidebar" class="md:hidden ml-auto text-gray-400 hover:text-white">
-                <i class="fas fa-times"></i>
-            </button>
         </div>
 
         <!-- Menu Navigasi -->
-        <nav class="sidebar-nav flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+        <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto sidebar-nav">
             <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white glass-hover transition-all group">
                 <i class="fas fa-tachometer-alt w-5 text-center"></i>
                 <span class="font-medium">Dashboard</span>
             </a>
             
             <div class="text-[10px] uppercase text-slate-500 font-bold pt-6 pb-2 px-4 tracking-widest">Master Data</div>
-            <a href="data-barang.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600 rounded-xl text-white shadow-lg shadow-blue-900/20 transition-all duration-300">
+            <a href="data-barang.html" class="flex items-center gap-3 px-4 py-3 bg-blue-600 rounded-xl text-white shadow-lg shadow-blue-900/20 transition-all">
                 <i class="fas fa-box w-5 text-center group-hover:scale-110 transition-transform"></i>
                 <span>Data Barang</span>
             </a>
         </nav>
-        <!-- End Menu Navigasi -->
 
         <div class="p-4 border-t border-slate-700">
             <a href="../login.html" class="flex items-center text-slate-400 gap-3 px-4 hover:text-white transition-all">
@@ -71,17 +62,15 @@
                 <span class="font-medium">Logout</span>
             </a>
         </div>
+        <!-- End Menu Navigasi -->
     </aside>
     <!-- End Sidebar -->
 
-    <!-- Overlay Mobile -->
-    <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-20 hidden md:hidden transition-opacity"></div>
-
-    <div class="flex-1 flex flex-col w-full overflow-hidden">
+    <div class="flex-1 flex flex-col w-full md:ml-72 overflow-hidden transition-all duration-300">
         <!-- Top Navbar -->
         <header class="bg-white/80 backdrop-blur-md sticky top-0 z-10 flex items-center justify-between px-8 py-4 border-b border-slate-100">
             <div class="flex items-center gap-4">
-                <button id="openSidebar" class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors">
+                <button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar" type="button" class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors">
                     <i class="fas fa-bars text-xl text-slate-600"></i>
                 </button>
                 <h2 class="text-xl font-bold text-slate-800 tracking-tight">Manajemen Inventaris</h2>
@@ -109,12 +98,10 @@
                     </nav>
                     <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Manajemen Inventaris</h2>
                 </div>
-                <div class="flex items-center gap-3">
-                    <button class="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-all shadow-sm">
+                <button data-modal-target="modalExport" data-modal-toggle="modalExport" class="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 font-semibold hover:bg-slate-50 transition-all shadow-sm">
                         <i class="fas fa-file-export"></i>
                         <span>Export</span>
-                    </button>
-                </div>
+                </button>
             </div>
         
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-wrap gap-4 items-center justify-between">
@@ -169,14 +156,8 @@
                                 <td class="px-6 py-4 text-slate-700 font-semibold">12 Unit</td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center gap-2">
-                                        <button class="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Detail">
+                                        <button data-modal-target="modalDetail" data-modal-toggle="modalDetail" class="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Detail">
                                             <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="p-2 rounded-lg text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-all" title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all" title="Hapus">
-                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -191,14 +172,8 @@
                                 <td class="px-6 py-4 text-slate-700 font-semibold">3 Unit</td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center gap-2">
-                                        <button class="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Detail">
+                                        <button data-modal-target="modalDetail" data-modal-toggle="modalDetail" class="p-2 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all" title="Detail">
                                             <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="p-2 rounded-lg text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-all" title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all" title="Hapus">
-                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -231,7 +206,7 @@
                             <h3 class="text-lg font-bold text-slate-800">
                                 <i class="fas fa-file-alt text-blue-600 mr-2"></i> Rincian Inventaris
                             </h3>
-                            <button id="closeModalBtn" class="text-slate-400 hover:text-slate-600">
+                            <button data-modal-hide="modalDetail" class="text-slate-400 hover:text-slate-600">
                                 <i class="fas fa-times text-xl"></i>
                             </button>
                         </div>
@@ -289,7 +264,7 @@
                         </div>
                     
                         <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end">
-                            <button id="closeModalFooter" class="px-6 py-2 bg-white border border-slate-200 rounded-xl text-slate-600 text-sm font-bold hover:bg-slate-100 transition-all">
+                            <button data-modal-hide="modalDetail" class="px-6 py-2 bg-white border border-slate-200 rounded-xl text-slate-600 text-sm font-bold hover:bg-slate-100 transition-all">
                                 Tutup
                             </button>
                         </div>
@@ -313,7 +288,7 @@
                                 <p class="text-slate-400 text-xs mt-0.5">Filter dan pilih kategori untuk diunduh</p>
                             </div>
                         </div>
-                        <button id="closeExportBtn" class="text-slate-400 hover:text-white transition-colors">
+                        <button data-modal-hide="modalExport" class="text-slate-400 hover:text-white transition-colors">
                             <i class="fas fa-times text-xl"></i>
                         </button>
                     </div>
@@ -366,81 +341,12 @@
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         AOS.init({
             duration: 800,
             once: true,
             easing: 'ease-in-out'
-        });
-
-        const sidebar = document.getElementById('sidebar');
-        const openSidebarBtn = document.getElementById('openSidebar');
-        const closeSidebarBtn = document.getElementById('closeSidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-
-        function toggleSidebar() {
-            sidebar.classList.toggle('hidden');
-            overlay.classList.toggle('hidden');
-        }
-
-        openSidebarBtn.addEventListener('click', toggleSidebar);
-        closeSidebarBtn.addEventListener('click', toggleSidebar);
-        overlay.addEventListener('click', toggleSidebar);
-
-        // Modal Detail
-        const modalDetail = document.getElementById('modalDetail');
-        const openModalBtns = document.querySelectorAll('button[title="Detail"]');
-        const closeModalElements = [
-            document.getElementById('closeModalBtn'),
-            document.getElementById('closeModalFooter'),
-            document.getElementById('closeModalOverlay')
-        ];
-
-        function toggleModal() {
-            modalDetail.classList.toggle('hidden');
-            document.body.classList.toggle('overflow-hidden');
-        }
-
-        openModalBtns.forEach(btn => {
-            btn.addEventListener('click', toggleModal);
-        });
-
-        closeModalElements.forEach(el => {
-            if (el) el.addEventListener('click', toggleModal);
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape" && !modalDetail.classList.contains('hidden')) {
-                toggleModal();
-            }
-        });
-
-        // Modal Export
-        const modalExport = document.getElementById('modalExport');
-        const openExportBtn = document.querySelector('button:has(.fa-file-export)'); // Mencari tombol export berdasarkan icon
-        const closeExportElements = [
-            document.getElementById('closeExportBtn'),
-            document.getElementById('closeExportOverlay')
-        ];
-
-        function toggleExportModal() {
-            modalExport.classList.toggle('hidden');
-            document.body.classList.toggle('overflow-hidden');
-        }
-
-        if (openExportBtn) {
-            openExportBtn.addEventListener('click', toggleExportModal);
-        }
-
-        closeExportElements.forEach(el => {
-            if (el) el.addEventListener('click', toggleExportModal);
-        });
-
-        document.getElementById('formExport').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const selected = document.querySelector('input[name="exportCategory"]:checked').value;
-            alert("Memulai Export untuk kategori: " + selected.toUpperCase());
-            toggleExportModal();
         });
 
         // Pencarian kategori pada modal
